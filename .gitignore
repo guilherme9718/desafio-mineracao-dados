@@ -1,4 +1,6 @@
 dados/*
+predicoes/*
+dados_produzidos/*.csv
 
 *.bundle.*
 lib/
