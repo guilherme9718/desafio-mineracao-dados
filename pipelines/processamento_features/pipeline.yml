@@ -1,0 +1,71 @@
+tasks:
+    - source: preprocessar_dados_basicos.ipynb
+      product:
+        data: output/preprocessar_dados_basicos_data.parquet
+        nb: output/output_preprocessar_dados_basicos.ipynb
+      params:
+        df_input_path: '{{df_input_path}}'
+        
+    - source: processar_attributes.ipynb
+      product:
+        data: output/processar_attributes_data.parquet
+        nb: output/output_processar_attributes.ipynb
+      params:
+        df_input_path: '{{df_input_path}}' 
+            
+    - source: processar_categories.ipynb
+      product:
+        data: output/processar_categories_data.parquet
+        nb: output/output_processar_categories.ipynb
+      params:
+        min_rows_categories: 50
+        df_input_path: '{{df_input_path}}'
+
+    - source: processar_hours.ipynb
+      product:
+        data: output/processar_hours_data.parquet
+        nb: output/output_processar_hours.ipynb
+      params:
+        df_input_path: '{{df_input_path}}'
+        discrete_hours: true
+
+    - source: graph_feature.ipynb
+      product:
+        data: output/graph_feature.parquet
+        graph: output/graph.gml
+        nb: output/output_graph_feature.ipynb
+      params:
+        df_input_path: '{{df_input_path}}'
+        df_review_input_path: '{{df_review_input_path}}'
+        edge_percent: 0.1
+
+    - source: calcular_score_reviews.ipynb
+      product:
+        data: output/calcular_score_reviews_data.parquet
+        nb: output/output_calcular_score_reviews.ipynb
+      params:
+        df_input_path: '{{df_input_path}}'
+        df_review_input_path: '{{df_review_input_path}}'
+        
+    - source: agrupar_dados.ipynb
+      product:
+        data: output/agrupar_dados_data.parquet
+        nb: output/output_agrupar_dados.ipynb
+      params:
+        df_input_path: '{{df_input_path}}'
+        df_review_input_path: '{{df_review_input_path}}'
+
+    - source: preparar_classificacao.ipynb
+      product:
+        data_X: output/preparar_classificacao_data_X.parquet
+        data_y: output/preparar_classificacao_data_y.parquet
+        nb: output/output_preparar_classificacao.ipynb
+      params:
+        not_classification_columns: ['business_id', 'attributes', 'categories', 'hours', 'destaque', 'graph_page_rank']
+        feature_selection_percentage: 0.8 # colunas que vão restar após a selecao de feature
+        dimensionality_reduction_percentage: 0.1 # colunas que vão restar após a redução de dimensionalidade
+        dimensionality_reduction_algoritm: 'svd' # pca ou svd
+
+    - source: teste_modelo.ipynb
+      product:
+        nb: output/output_teste_modelo.ipynb

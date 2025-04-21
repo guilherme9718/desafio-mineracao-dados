@@ -1,6 +1,7 @@
 dados/*
 predicoes/*
 dados_produzidos/*.csv
+*.gml
 
 *.bundle.*
 lib/
