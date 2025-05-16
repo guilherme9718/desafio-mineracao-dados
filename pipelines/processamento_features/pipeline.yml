@@ -18,7 +18,7 @@ tasks:
         data: output/processar_categories_data.parquet
         nb: output/output_processar_categories.ipynb
       params:
-        min_rows_categories: 50
+        min_rows_categories: 0
         df_input_path: '{{df_input_path}}'
 
     - source: processar_hours.ipynb
@@ -27,7 +27,7 @@ tasks:
         nb: output/output_processar_hours.ipynb
       params:
         df_input_path: '{{df_input_path}}'
-        discrete_hours: true
+        discrete_hours: false
 
     - source: graph_feature.ipynb
       product:
