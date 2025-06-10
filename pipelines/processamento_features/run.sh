@@ -1,0 +1,1 @@
+ploomber build --entry-point pipeline.yml
